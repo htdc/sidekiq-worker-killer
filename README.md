@@ -39,6 +39,7 @@ The following options can be overrided.
 | grace_time | 900 seconds | when shutdown is triggered, the Sidekiq process will not accept new job and wait at most 15 minutes for running jobs to finish. If Float::INFINITY specified, will wait forever. |
 | shutdown_wait | 30 seconds | when the grace time expires, still running jobs get 30 seconds to stop. After that, kill signal is triggered. |
 | kill_signal | SIGKILL | Signal to use to kill Sidekiq process if it doesn't stop. |
+| log_details | false | log additional details including job, worker and queue |
 | gc | true | Try to run garbage collection before Sidekiq process stops in case of exceeded max_rss. |
 | skip_shutdown_if | proc {false} | Executes a block of code after max_rss exceeds but before requesting shutdown. |
 
