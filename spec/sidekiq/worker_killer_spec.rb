@@ -88,6 +88,15 @@ describe Sidekiq::WorkerKiller do
         end
       end
 
+      context "when log_details is true" do
+        subject{ described_class.new(max_rss: 2, log_details: true) }
+        it "should not call garbage collect" do
+          allow(subject).to receive(:request_shutdown)
+          expect(subject).to receive(:warn).twice
+          subject.call(worker, job, queue){}
+        end
+      end
+
       context "but max rss is 0" do
         subject{ described_class.new(max_rss: 0) }
         it "should not request shutdown" do
